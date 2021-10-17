@@ -27,11 +27,11 @@ from wbb import app
 from wbb.core.decorators.errors import capture_err
 from wbb.utils.http import get
 
-__MODULE__ = "Repo"
-__HELP__ = "/repo - To Get My Github Repository Link " "And Support Group Link"
+__MODULE__ = "Support"
+__HELP__ = "/support - To Get My Support Link"
 
 
-@app.on_message(filters.command("repo") & ~filters.edited)
+@app.on_message(filters.command("support") & ~filters.edited)
 @capture_err
 async def repo(_, message):
     users = await get(
@@ -45,11 +45,7 @@ async def repo(_, message):
         )
         count += 1
 
-    text = f"""[Github](https://github.com/thehamkercat/WilliamButcherBot) | [Group](t.me/PatheticProgrammers)
-```----------------
-| Contributors |
-----------------```
-{list_of_users}"""
+    text = f"""[Support](https://t.me/DarkPentester)"""
     await app.send_message(
         message.chat.id, text=text, disable_web_page_preview=True
     )
