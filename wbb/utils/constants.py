@@ -52,7 +52,7 @@ async def mkdwnhelp(_, m: Message):
     )
     if m.chat.type != "private":
         await m.reply(
-            "Click on the below button to get markdown usage syntax in pm!",
+            "Click On The Below Button To Get Markdown Usage Syntax In Pm!",
             reply_markup=keyb,
         )
     else:
