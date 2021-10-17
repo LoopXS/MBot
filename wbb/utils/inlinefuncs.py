@@ -86,16 +86,8 @@ async def inline_help_func(__HELP__):
             input_message_content=InputTextMessageContent(
                 "Click A Button To Get Started."
             ),
-            thumb_url="https://hamker.me/cy00x5x.png",
+            thumb_url="https://telegra.ph/file/1d976a1e12866bbfb1ac5.jpg",
             reply_markup=buttons,
-        ),
-        InlineQueryResultArticle(
-            title="Github Repo",
-            description="Get Github Respository Of Bot.",
-            input_message_content=InputTextMessageContent(
-                "https://github.com/thehamkercat/WilliamButcherBot"
-            ),
-            thumb_url="https://hamker.me/gjc9fo3.png",
         ),
     ]
     answerss = await alive_function(answerss)
@@ -114,7 +106,7 @@ async def alive_function(answers):
     )
 
     msg = f"""
-**[William✨](https://github.com/thehamkercat/WilliamButcherBot):**
+**HyLix:**
 **MainBot:** `{bot_state}`
 **UserBot:** `{ubot_state}`
 **Python:** `{pyver.split()[0]}`
@@ -127,7 +119,7 @@ async def alive_function(answers):
         InlineQueryResultArticle(
             title="Alive",
             description="Check Bot's Stats",
-            thumb_url="https://static2.aniimg.com/upload/20170515/414/c/d/7/cd7EEF.jpg",
+            thumb_url="https://telegra.ph/file/31f163c37a58736e1cd3b.jpg",
             input_message_content=InputTextMessageContent(
                 msg, disable_web_page_preview=True
             ),
@@ -150,7 +142,7 @@ async def translate_func(answers, lang, tex):
         return answers
     result = result.result
     msg = f"""
-__**Translated from {result.src} to {result.dest}**__
+__**Translated From {result.src} To {result.dest}**__
 
 **INPUT:**
 {tex}
@@ -160,7 +152,7 @@ __**Translated from {result.src} to {result.dest}**__
     answers.extend(
         [
             InlineQueryResultArticle(
-                title=f"Translated from {result.src} to {result.dest}.",
+                title=f"Translated From {result.src} To {result.dest}.",
                 description=result.translatedText,
                 input_message_content=InputTextMessageContent(msg),
             ),
@@ -566,7 +558,7 @@ async def pmpermit_func(answers, user_id, victim):
             callback_data="pmpermit to_scam_you a",
         ),
         InlineKeyboardButton(
-            text="Approve me", callback_data="pmpermit approve_me a"
+            text="Approve Me", callback_data="pmpermit approve_me a"
         ),
         InlineKeyboardButton(
             text="Approve", callback_data=f"pmpermit approve {victim}"
