@@ -38,7 +38,7 @@ from wbb.utils.filter_groups import flood_group
 
 __MODULE__ = "Flood"
 __HELP__ = """
-Anti-Flood system, the one who sends more than 10 messages in a row, gets muted for an hour (Except for admins).
+Anti-Flood system, the one who sends more than 3 messages in a row, gets muted for an hour (Except for admins).
 
 /flood [ENABLE|DISABLE] - Turn flood detection on or off
 """
@@ -92,7 +92,7 @@ async def flood_control_func(_, message: Message):
         return
 
     # Mute if user sends more than 10 messages in a row
-    if DB[chat_id][user_id] >= 10:
+    if DB[chat_id][user_id] >= 3:
         DB[chat_id][user_id] = 0
         try:
             await message.chat.restrict_member(
@@ -106,7 +106,7 @@ async def flood_control_func(_, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        text="🚨   Unmute   🚨",
+                        text="🚨   UnMute   🚨",
                         callback_data=f"unmute_{user_id}",
                     )
                 ]
