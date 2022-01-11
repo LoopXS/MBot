@@ -249,7 +249,7 @@ async def help_parser(name, keyboard=None):
     return (
         """Hi {first_name}, I'M {bot_name} 🙂
 I'M A Group Management Bot With Some Usefule Features !
-You Can Choose An Option Below, By Clicking A Button :)
+You Can Choose An Option Below, By Clicking A Button.
 """.format(
             first_name=name,
             bot_name=BOT_NAME,
