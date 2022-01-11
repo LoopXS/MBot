@@ -67,13 +67,14 @@ async def bot_sys_stats():
     disk = psutil.disk_usage("/").percent
     process = psutil.Process(os.getpid())
     stats = f"""
-{USERBOT_USERNAME}@William
-------------------
-UPTIME: {formatter.get_readable_time((bot_uptime))}
-BOT: {round(process.memory_info()[0] / 1024 ** 2)} MB
-CPU: {cpu}%
-RAM: {mem}%
-DISK: {disk}%
+✗ Stats :
+≺ ━━━━━━ ♡ ━━━━━━ ≻
+✦ UPTIME ~ {formatter.get_readable_time((bot_uptime))}
+✧ BOT ~ {round(process.memory_info()[0] / 1024 ** 2)} MB
+✦ CPU ~ {cpu}%
+✧ RAM ~ {mem}%
+✦ DISK ~ {disk}%
+≺ ━━━━━━ ♡ ━━━━━━ ≻
 """
     return stats
 
@@ -196,6 +197,7 @@ async def broadcast_message(_, message):
 
 # Update
 
+
 @app.on_message(filters.command("update") & filters.user(SUDOERS))
 async def update_restart(_, message):
     try:
@@ -206,5 +208,6 @@ async def update_restart(_, message):
     except Exception as e:
         return await message.reply_text(str(e))
     m = await message.reply_text(
-        "**Updated with default branch, restarting now.**")
+        "**Updated with default branch, restarting now.**"
+    )
     await restart(m)
