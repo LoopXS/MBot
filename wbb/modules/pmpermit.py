@@ -90,7 +90,9 @@ async def pm_approve(_, message):
 )
 async def pm_disapprove(_, message):
     if not message.reply_to_message:
-        return await eor(message, text="Reply To A User's Message To Approve.")
+        return await eor(
+            message, text="Reply To A User's Message To Disapprove !"
+        )
     user_id = message.reply_to_message.from_user.id
     if not await is_pmpermit_approved(user_id):
         await eor(message, text="User Is Already Disapproved To PM !")
@@ -147,7 +149,7 @@ async def pmpermit_cq(_, cq):
     )
     if data == "approve":
         if user_id != USERBOT_ID:
-            return await cq.answer("~ This Button Is Not For You !")
+            return await cq.answer("~ This Button Isn't For You !")
         await approve_pmpermit(int(victim))
         return await app.edit_inline_text(
             cq.inline_message_id, "User Has Been Approved To PM !"
@@ -155,7 +157,7 @@ async def pmpermit_cq(_, cq):
 
     if data == "block":
         if user_id != USERBOT_ID:
-            return await cq.answer("~ This Button Is Not For You !")
+            return await cq.answer("~ This Button Isn't For You !")
         await cq.answer()
         await app.edit_inline_text(
             cq.inline_message_id, "Successfully Blocked The User !"
@@ -170,7 +172,7 @@ async def pmpermit_cq(_, cq):
         )
 
     if user_id == USERBOT_ID:
-        return await cq.answer("~ It's For The Other Person !")
+        return await cq.answer("It's For The Other Person !")
 
     if data == "to_scam_you":
         async for m in app2.iter_history(user_id, limit=6):
