@@ -56,7 +56,9 @@ async def start_bot():
                 hasattr(imported_module, "__HELP__")
                 and imported_module.__HELP__
             ):
-                HELPABLE[imported_module.__MODULE__.lower()] = imported_module
+                HELPABLE[
+                    imported_module.__MODULE__.replace(" ", "_").lower()
+                ] = imported_module
     bot_modules = ""
     j = 1
     for i in ALL_MODULES:
@@ -156,7 +158,7 @@ keyboard = InlineKeyboardMarkup(
 async def start(_, message):
     if message.chat.type != "private":
         return await message.reply(
-            "Pm Me For More Details.", reply_markup=keyboard
+            "PM Me For More Details.", reply_markup=keyboard
         )
     if len(message.text.split()) > 1:
         name = (message.text.split(None, 1)[1]).lower()
@@ -189,7 +191,7 @@ async def start(_, message):
 async def help_command(_, message):
     if message.chat.type != "private":
         if len(message.command) >= 2:
-            name = (message.text.split(None, 1)[1]).lower()
+            name = (message.text.split(None, 1)[1]).replace(" ", "_").lower()
             if str(name) in HELPABLE:
                 key = InlineKeyboardMarkup(
                     [
@@ -211,11 +213,11 @@ async def help_command(_, message):
                 )
         else:
             await message.reply(
-                "Pm Me For More Details.", reply_markup=keyboard
+                "PM Me For More Details.", reply_markup=keyboard
             )
     else:
         if len(message.command) >= 2:
-            name = (message.text.split(None, 1)[1]).lower()
+            name = (message.text.split(None, 1)[1]).replace(" ", "_").lower()
             if str(name) in HELPABLE:
                 text = (
                     f"Here is the help for **{HELPABLE[name].__MODULE__}**:\n"
@@ -245,10 +247,9 @@ async def help_parser(name, keyboard=None):
     if not keyboard:
         keyboard = InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "help"))
     return (
-        """Hello {first_name}, My name is {bot_name}.
-I'm a group management bot with some useful features.
-You can choose an option below, by clicking a button.
-Also you can ask anything in Support Group.
+        """Hi {first_name}, I'M {bot_name} 🙂
+I'M A Group Management Bot With Some Usefule Features !
+You Can Choose An Option Below, By Clicking A Button :)
 """.format(
             first_name=name,
             bot_name=BOT_NAME,
@@ -288,15 +289,15 @@ Hi {query.from_user.first_name}, I'M {BOT_NAME} 🙂
 I'M A Group Management Bot With Some Usefule Features !
 You Can Choose An Option Below, By Clicking A Button :)
 
-General Command Are:
- - /start: Start The Bot
- - /help: Give This Message
+General command are:
+ - /start: Start the bot
+ - /help: Give this message
  """
     if mod_match:
-        module = mod_match.group(1)
+        module = (mod_match.group(1)).replace(" ", "_")
         text = (
             "{} **{}**:\n".format(
-                "Here Is The Help For", HELPABLE[module].__MODULE__
+                "Here is the help for", HELPABLE[module].__MODULE__
             )
             + HELPABLE[module].__HELP__
         )
