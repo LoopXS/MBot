@@ -89,6 +89,14 @@ async def inline_help_func(__HELP__):
             thumb_url="https://telegra.ph/file/1d976a1e12866bbfb1ac5.jpg",
             reply_markup=buttons,
         ),
+        InlineQueryResultArticle(
+            title="Github Repo",
+            description="Get Github Respository Of Bot.",
+            input_message_content=InputTextMessageContent(
+                "https://github.com/thehamkercat/WilliamButcherBot"
+            ),
+            thumb_url="https://hamker.me/gjc9fo3.png",
+        ),
     ]
     answerss = await alive_function(answerss)
     return answerss
@@ -119,7 +127,7 @@ async def alive_function(answers):
         InlineQueryResultArticle(
             title="Alive",
             description="Check Bot's Stats",
-            thumb_url="https://telegra.ph/file/31f163c37a58736e1cd3b.jpg",
+            thumb_url="https://static2.aniimg.com/upload/20170515/414/c/d/7/cd7EEF.jpg",
             input_message_content=InputTextMessageContent(
                 msg, disable_web_page_preview=True
             ),
@@ -142,7 +150,7 @@ async def translate_func(answers, lang, tex):
         return answers
     result = result.result
     msg = f"""
-__**Translated From {result.src} To {result.dest}**__
+__**Translated from {result.src} to {result.dest}**__
 
 **INPUT:**
 {tex}
@@ -152,7 +160,7 @@ __**Translated From {result.src} To {result.dest}**__
     answers.extend(
         [
             InlineQueryResultArticle(
-                title=f"Translated From {result.src} To {result.dest}.",
+                title=f"Translated from {result.src} to {result.dest}.",
                 description=result.translatedText,
                 input_message_content=InputTextMessageContent(msg),
             ),
@@ -547,18 +555,18 @@ async def test_speedtest_cq(_, cq):
 async def pmpermit_func(answers, user_id, victim):
     if user_id != USERBOT_ID:
         return
-    caption = f"🎭 **Hi This Is {USERBOT_NAME} PM Protection** 🎭\n➰ Pls Wait Till I Approve You To PM\n➰ Don't Send More Than 5 Msg Cause,\n➰ You'll Get Blocked & Reported !"
+    caption = f"Hi, I'm {USERBOT_NAME}, What are you here for?, You'll be blocked if you send more than 5 messages."
     buttons = InlineKeyboard(row_width=2)
     buttons.add(
         InlineKeyboardButton(
             text="To Scam You", callback_data="pmpermit to_scam_you a"
         ),
         InlineKeyboardButton(
-            text="For Promotion",
+            text="For promotion",
             callback_data="pmpermit to_scam_you a",
         ),
         InlineKeyboardButton(
-            text="Approve Me", callback_data="pmpermit approve_me a"
+            text="Approve me", callback_data="pmpermit approve_me a"
         ),
         InlineKeyboardButton(
             text="Approve", callback_data=f"pmpermit approve {victim}"
@@ -594,11 +602,9 @@ async def ping_func(answers):
 
 
 async def yt_music_func(answers, url):
-    if "http" not in url:
-        url = (await arq.youtube(url)).result[0]
-        url = f"https://youtube.com{url.url_suffix}"
+    arq_resp = await arq.youtube(url)
     loop = asyncio.get_running_loop()
-    music = await loop.run_in_executor(None, download_youtube_audio, url)
+    music = await loop.run_in_executor(None, download_youtube_audio, arq_resp)
     if not music:
         msg = "**ERROR**\n__MUSIC TOO LONG__"
         answers.append(
