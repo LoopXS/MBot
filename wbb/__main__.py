@@ -287,12 +287,8 @@ async def help_button(client, query):
     top_text = f"""
 Hi {query.from_user.first_name}, I'M {BOT_NAME} 🙂
 I'M A Group Management Bot With Some Usefule Features !
-You Can Choose An Option Below, By Clicking A Button :)
-
-General command are:
- - /start: Start the bot
- - /help: Give this message
- """
+You Can Choose An Option Below, By Clicking A Button.
+"""
     if mod_match:
         module = (mod_match.group(1)).replace(" ", "_")
         text = (
